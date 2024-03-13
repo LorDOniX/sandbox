@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true,
+		"module": "ESNext",
+		"target": "ESNext",
+		"resolveJsonModule": true,
+		"baseUrl": ".",
+		"paths": {
+			"~/*": [
+				"src/*"
+			]
+		},
+		"moduleResolution": "node"
+	},
+	"include": ["src/**/*", "custom.d.ts", "src/events"]
+}
