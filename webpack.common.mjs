@@ -38,7 +38,7 @@ function getConfig({
 	const { env } = envVars;
 	const production = env && env === "prod";
 	const PACKAGE = getJsonFile(versionFile);
-	const nameWithHase = `[name]`;
+	const nameWithHase = `ending-api`;
 
 	return {
 		mode: production ? 'production' : 'development',

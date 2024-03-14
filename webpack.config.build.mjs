@@ -10,7 +10,7 @@ const buildConf = envVars => {
 	conf.entry = path.resolve(__dirname, "./src/ending.ts");
 	conf.output = {
 		path: path.resolve(__dirname, "dist"),
-		filename: `[name].js`,
+		filename: `ending-api.js`,
 		libraryTarget: 'window',
 		library: "SznEnding",
 	};
