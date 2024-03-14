@@ -4,8 +4,8 @@
 	"description": "",
 	"scripts": {
 		"clean": "rm -rf dist dist-actions",
-		"start": "webpack server --config webpack.config.mjs --env env=dev",
-		"build": "webpack --config webpack.config.mjs --env env=prod"
+		"start": "webpack server --config webpack.config.watch.mjs --env env=dev",
+		"build": "webpack --config webpack.config.build.mjs --env env=prod"
 	},
 	"author": "Roman Makudera",
 	"license": "ISC",
