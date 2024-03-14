@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+/* eslint-disable no-magic-numbers */
 import "./ending.less";
 
 type TVariant = "none" | "tooltip" | "tooltip-opening" | "popup" | "fullscreen";
@@ -27,7 +28,7 @@ const LANGS = {
 		console: `Používáte zastaralou verzi knihovny JS SDK Mapy.cz. Tato knihovna přestane být v blízké době podporována. Doporučujeme přejít na nové REST API Mapy.cz.`
 		+ ` Více informací najdete zde: https://developer.mapy.cz/js-api/ukonceni-podpory-js-sdk/`,
 		tooltip: "Podpora tohoto API končí{bl}{date}.",
-		popup: "Podpora tohoto API končí {date}. Pro obnovení služby{bl}se připojte na nové API.",
+		popup: "Podpora tohoto API končí {date}. Pro obnovení služby se připojte na nové API.",
 		fullscreen: "Podpora JS API byla ukončena {date}. Pro obnovení služby se připojte na nové API.",
 		moreAboutApi: "Více o novém API",
 		moreAboutApiFullscreen: "Chci nové API od Mapy.cz",
@@ -36,7 +37,7 @@ const LANGS = {
 		console: `Používáte zastaralou verzi knihovny JS SDK Mapy.cz. Tato knihovna přestane být v blízké době podporována. Doporučujeme přejít na nové REST API Mapy.cz.`
 		+ ` Více informací najdete zde: https://developer.mapy.cz/js-api/ukonceni-podpory-js-sdk/`,
 		tooltip: "Podpora tohoto API končí{bl}{date}.",
-		popup: "Podpora tohoto API končí {date}. Pro obnovení služby{bl}se připojte na nové API.",
+		popup: "Podpora tohoto API končí {date}. Pro obnovení služby se připojte na nové API.",
 		fullscreen: "Podpora JS API byla ukončena {date}. Pro obnovení služby se připojte na nové API.",
 		moreAboutApi: "More about new API",
 		moreAboutApiFullscreen: "I want new API from Mapy.cz",
