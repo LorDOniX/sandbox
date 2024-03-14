@@ -16,8 +16,56 @@ body {
 	width: 100%;
 	height: 100%;
 	background: #fafafa;
+	padding-top: 200px;
+	padding-left: 200px;
 }
 
 .tooltip {
+	position: relative;
+	font-family: Arial;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	color: #fff;
 
+	.bubble {
+		position: absolute;
+		padding: 12px;
+		border-radius: 8px;
+		background: #DB5200;
+		transform: translateX(-50%) translateY(-100%);
+		max-width: 192px;
+		margin-left: 12px;
+		// 12 + 40
+		margin-top: -52px;
+		box-sizing: border-box;
+		box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.20), 0px 1px 10px 0px rgba(0, 0, 0, 0.12), 0px 4px 5px 0px rgba(0, 0, 0, 0.14);
+
+		a {
+			color: #fff;
+			font-weight: 700;
+			text-decoration: underline;
+		}
+
+		.bubble-beak {
+			position: absolute;
+			left: 50%;
+			margin-left: -8px;
+			bottom: -11px;
+			filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.20));
+			z-index: 2;
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			left: 8px;
+			bottom: 0;
+			right: 8px;
+			background: #DB5200;
+			width: calc(100% - 16px);
+			height: 5px;
+			z-index: 3;
+		}
+	}
 }
