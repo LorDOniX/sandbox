@@ -18,7 +18,10 @@ async function main() {
 	const date = new Date();
 	const parent = document.getElementById("content");
 
-	parent.append(createVariant("fullscreen", date));
+	parent.append(createVariant({
+		variant: "tooltip",
+		date,
+	}));
 }
 
 main();

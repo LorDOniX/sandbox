@@ -5,14 +5,16 @@
 	font-style: normal;
 	line-height: normal;
 	color: #fff;
+	cursor: pointer;
 
 	.bubble {
+		display: none;
 		position: absolute;
 		padding: 12px;
 		border-radius: 8px;
 		background: #DB5200;
 		transform: translateX(-50%) translateY(-100%);
-		max-width: 192px;
+		width: 192px;
 		margin-left: 12px;
 		// 12 + 40
 		margin-top: -52px;
@@ -45,6 +47,25 @@
 			width: calc(100% - 16px);
 			height: 5px;
 			z-index: 3;
+		}
+
+		&::before {
+			content: "";
+			position: absolute;
+			left: 50%;
+			bottom: 0;
+			width: 16px;
+			height: 46px;
+			z-index: 3;
+			margin-left: -8px;
+			transform: translateY(100%);
+		}
+	}
+
+	&.show-bubble,
+	&:hover {
+		.bubble {
+			display: block;
 		}
 	}
 }

@@ -1,13 +1,30 @@
 /* eslint-disable no-console */
 import "./ending.less";
 
-type TVariant = "tooltip" | "popup" | "fullscreen";
+type TVariant = "none" | "tooltip" | "tooltip-opening" | "popup" | "fullscreen";
 type TLang = "cs" | "en";
 
+interface ICheckApiKeyData {
+	data?: {
+		whitelisted: boolean;
+	};
+	errors?: Array<{
+		message: string;
+	}>;
+}
+
+interface ICreateVariant {
+	variant: TVariant;
+	date: Date;
+	lang?: TLang;
+	openingTimeout?: number;
+}
+
 const LINK = "https://developer.mapy.cz/js-api/ukonceni-podpory-js-sdk/";
+const ALL_LANGS: Array<TLang> = ["cs", "en"];
 const LANGS = {
 	cs: {
-		console: `Používáte zastaralou verzi knihovny JS SDK Mapy.cz. Tato knihovna přestane být v blízké době podporováno. Doporučujeme přejít na nové REST API Mapy.cz.`
+		console: `Používáte zastaralou verzi knihovny JS SDK Mapy.cz. Tato knihovna přestane být v blízké době podporována. Doporučujeme přejít na nové REST API Mapy.cz.`
 		+ ` Více informací najdete zde: https://developer.mapy.cz/js-api/ukonceni-podpory-js-sdk/`,
 		tooltip: "Podpora tohoto API končí{bl}{date}.",
 		popup: "Podpora tohoto API končí {date}. Pro obnovení služby{bl}se připojte na nové API.",
@@ -16,7 +33,7 @@ const LANGS = {
 		moreAboutApiFullscreen: "Chci nové API od Mapy.cz",
 	},
 	en: {
-		console: `Používáte zastaralou verzi knihovny JS SDK Mapy.cz. Tato knihovna přestane být v blízké době podporováno. Doporučujeme přejít na nové REST API Mapy.cz.`
+		console: `Používáte zastaralou verzi knihovny JS SDK Mapy.cz. Tato knihovna přestane být v blízké době podporována. Doporučujeme přejít na nové REST API Mapy.cz.`
 		+ ` Více informací najdete zde: https://developer.mapy.cz/js-api/ukonceni-podpory-js-sdk/`,
 		tooltip: "Podpora tohoto API končí{bl}{date}.",
 		popup: "Podpora tohoto API končí {date}. Pro obnovení služby{bl}se připojte na nové API.",
@@ -125,31 +142,56 @@ function createConsoleInfo(lang: TLang = "cs") {
 async function checkApiKey(backendUrl: string, apiKey: string): Promise<boolean> {
 	try {
 		const request = await fetch(`${backendUrl}/checkApiKey?apiKey=${apiKey}`);
-		const json: { data: { whitelisted: boolean; } } = await request.json();
+		const json: ICheckApiKeyData = await request.json();
+
+		if (json.errors) {
+			return false;
+		}
 
 		return json.data.whitelisted;
 	} catch (exc) {
-		console.log(exc);
+		//console.log(exc);
 	}
 
 	return false;
 }
 
-function createVariant(variant: TVariant, date: Date, lang: TLang = "cs"): HTMLElement {
+function createVariant({
+	variant,
+	date,
+	lang = ALL_LANGS[0],
+	openingTimeout = 4000,
+}: ICreateVariant): HTMLElement|null {
+	const endingLang = ALL_LANGS.indexOf(lang) === -1
+		? ALL_LANGS[0] as TLang
+		: lang;
+
 	switch (variant) {
 		case "tooltip":
-			return createTooltip(lang, date);
+			return createTooltip(endingLang, date);
+
+		case "tooltip-opening": {
+			const elem = createTooltip(endingLang, date);
+
+			elem.classList.add("show-bubble");
+
+			setTimeout(() => {
+				elem.classList.remove("show-bubble");
+			}, openingTimeout);
+
+			return elem;
+		}
 
 		case "popup":
-			return createPopup(lang, date);
+			return createPopup(endingLang, date);
 
 		case "fullscreen":
-			return createFullscreen(lang, date);
+			return createFullscreen(endingLang, date);
 
 		default:
 	}
 
-	return document.createElement("div");
+	return null;
 }
 
 export {
